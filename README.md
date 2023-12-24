@@ -51,7 +51,7 @@ Contributions to the project are welcome! Please refer to the contribution guide
 
 ## License
 
-This project is licensed under [LICENSE-NAME]. See the LICENSE file for more details.
+This project is licensed under Apache License 2.0. See the LICENSE file for more details.
 
 ## Disclaimer
 
