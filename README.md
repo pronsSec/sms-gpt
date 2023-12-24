@@ -1,6 +1,7 @@
 # sms-gpt
 
-# GPT Access via SMS Framework
+![DALL·E 2023-12-24 05 36 46 - Anime style illustration for a README file depicting a person using SMS to access ChatGPT during a natural disaster, specifically a hurricane  The sce](https://github.com/pronsSec/sms-gpt/assets/93559326/abaa594c-4ddb-4d5e-8277-733deb59cc04)
+
 
 This project provides a simple and streamlined framework for accessing GPT (Generative Pre-trained Transformer) models via SMS. It's designed to be easy to set up (taking about an hour) and is ideal for situations where traditional internet access is limited, such as in natural disasters, remote areas, or in countries where access to services like ChatGPT is restricted.
 
