@@ -34,7 +34,7 @@ This project provides a simple and streamlined framework for accessing GPT (Gene
 3. **Terraform Initialization and Apply**:
 - terraform init
 - terraform apply
-- 4. **Configure Environment Variables**:
+4. **Configure Environment Variables**:
 - Set up necessary environment variables for Twilio and OpenAI credentials in the startup script.
 
 ## Configuration
