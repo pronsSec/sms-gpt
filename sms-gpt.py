@@ -46,14 +46,17 @@ def get_chatgpt_response(user_message):
 def send_sms_response(response, recipient_number, twilio_client):
     max_sms_length = 159
     messages = [response[i:i + max_sms_length] for i in range(0, len(response), max_sms_length)]
-
-    for msg in messages:
-        twilio_client.messages.create(
-            body=msg,
-            from_=twilio_number,
-            to=recipient_number
-        )
-        time.sleep(3)
+    try:
+        for msg in messages:
+            message = twilio_client.messages.create(
+                body=msg,
+                from_=twilio_number,
+                to=recipient_number
+            )
+            logging.info(f"Sent message to {recipient_number}: {message.sid}")
+            time.sleep(3)
+    except Exception as e:
+        logging.error(f"Failed to send SMS: {e}")        
 
 
 def process_request_in_background(message, recipient_number, twilio_client):
@@ -61,10 +64,13 @@ def process_request_in_background(message, recipient_number, twilio_client):
     thread.start()
 
 
-def handle_long_running_task(message, recipient_number, twilio_client):
-    response = get_chatgpt_response(message)
-    send_sms_response(response, recipient_number, twilio_client)
 
+def handle_long_running_task(message, recipient_number, twilio_client):
+    try:
+        response = get_chatgpt_response(message)
+        send_sms_response(response, recipient_number, twilio_client)
+    except Exception as e:
+        logging.error(f"Error in background task: {e}")
 
 
 @app.route('/sms', methods=['POST'])
