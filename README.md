@@ -26,7 +26,7 @@ This project provides a simple and streamlined framework for accessing GPT (Gene
 ## Setup and Deployment
 
 1. **Clone the Repository**: 
-- git clone <repository-url>
+- git clone https://github.com/pronsSec/sms-gpt
 2. **Configure Terraform**:
 - Navigate to the Terraform configuration directory.
 - Update the `main.tf` with your Google Cloud project details and credentials.
