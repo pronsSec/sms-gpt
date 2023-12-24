@@ -1,6 +1,7 @@
 from flask import Flask, request
 from twilio.twiml.messaging_response import MessagingResponse
 from twilio.rest import Client
+from markupsafe import escape
 import openai
 import time
 import threading
@@ -78,6 +79,9 @@ def handle_long_running_task(message, recipient_number, twilio_client):
 @app.route('/sms', methods=['POST'])
 def sms_reply():
     incoming_msg = request.form.get('Body')
+    sanitized_input = escape(incoming_msg)
+
+
     sender_number = request.form.get('From')  # Get the sender's phone number
 
     # Acknowledge the SMS immediately
@@ -85,7 +89,7 @@ def sms_reply():
     resp.message("Received your message, processing it now. We'll send you the response shortly.")
 
     # Process the request in the background
-    process_request_in_background(incoming_msg, sender_number, twilio_client)
+    process_request_in_background(sanitized_input, sender_number, twilio_client)
 
     return str(resp)
 
