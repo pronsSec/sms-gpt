@@ -36,9 +36,9 @@ def get_chatgpt_response(user_message):
             ],
         )
         return completion.choices[0].message.content
-    except RequestException as e:
-        logging.error(f"Network-related error when calling OpenAI: {e}")
-        return "Error in generating response due to network issue."
+    except openai.error.OpenAIError as e:
+        logging.error(f"Error from OpenAI API: {e}")
+        return "Error in generating response from OpenAI."
     except Exception as e:
         logging.error(f"Unexpected error in get_chatgpt_response: {e}")
         return "An unexpected error occurred."
@@ -58,8 +58,9 @@ def send_sms_response(response, recipient_number, twilio_client):
             )
             logging.info(f"Sent message to {recipient_number}: {message.sid}")
             time.sleep(3)
-    except Exception as e:
-        logging.error(f"Failed to send SMS: {e}")        
+    except TwilioRestException as e:
+        logging.error(f"Error from Twilio API: {e}")            
+      
 
 
 def process_request_in_background(message, recipient_number, twilio_client):
