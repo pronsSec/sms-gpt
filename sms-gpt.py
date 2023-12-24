@@ -5,7 +5,9 @@ import openai
 import time
 import threading
 import logging
+import logging.config
 
+logging.config.fileConfig('logging.conf')
 
 logging.basicConfig(level=logging.INFO, format='%(asctime)s - %(name)s - %(levelname)s - %(message)s')
 
