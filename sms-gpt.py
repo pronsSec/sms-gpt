@@ -4,6 +4,10 @@ from twilio.rest import Client
 import openai
 import time
 import threading
+import logging
+
+
+logging.basicConfig(level=logging.INFO, format='%(asctime)s - %(name)s - %(levelname)s - %(message)s')
 
 
 app = Flask(__name__)
@@ -29,8 +33,13 @@ def get_chatgpt_response(user_message):
             ],
         )
         return completion.choices[0].message.content
+    except RequestException as e:
+        logging.error(f"Network-related error when calling OpenAI: {e}")
+        return "Error in generating response due to network issue."
     except Exception as e:
-        return "Error in generating response: " + str(e)
+        logging.error(f"Unexpected error in get_chatgpt_response: {e}")
+        return "An unexpected error occurred."
+
 
 
 
